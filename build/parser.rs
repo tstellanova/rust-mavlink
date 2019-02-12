@@ -131,8 +131,8 @@ impl MavProfile {
         let mav_message_id = self.emit_mav_message_id(enum_names.clone(), msg_ids.clone());
         let mav_message_serialize = self.emit_mav_message_serialize(enum_names);
 
-        //TODO verify that id_width of u8 is OK even in mavlink v1
-        let id_width = Ident::from("u32");
+        //use id_width of u32 on both v1 and v2, and encode/decode appropriately,
+        //limiting to u8 on mavlink v1
 
         quote!{
             #comment
@@ -155,7 +155,7 @@ impl MavProfile {
                 #mav_message_parse
                 #mav_message_id
                 #mav_message_serialize
-                pub fn extra_crc(id: #id_width) -> u8 {
+                pub fn extra_crc(id: u32) -> u8 {
                     match id {
                         #(#msg_ids => #msg_crc,)*
                         _ => 0,

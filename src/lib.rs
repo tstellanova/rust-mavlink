@@ -34,7 +34,7 @@ extern crate bitflags;
 #[allow(unused_variables)]
 #[allow(unused_mut)]
 pub mod common {
-    use MavlinkVersion; //TODO verify
+    use MavlinkVersion;
     include!(concat!(env!("OUT_DIR"), "/common.rs"));
 }
 
@@ -110,7 +110,7 @@ impl MavFrame {
                 v.extend_from_slice(&bytes);
             },
             MavlinkVersion::V1 => {
-                v.push(self.msg.message_id() as u8); //TODO check
+                v.push(self.msg.message_id() as u8); //limit ID to u8 on mavlink v1
             }
         }
 

@@ -56,8 +56,8 @@ pub fn tcpin<T: ToSocketAddrs>(address: T) -> io::Result<TcpConnection> {
                 })
             },
             Err(e) => {
-                //TODO don't println in lib
-                println!("listener err: {}", e);
+                //println!("listener err: {}", e);
+                return Err(e);
             },
         }
     }

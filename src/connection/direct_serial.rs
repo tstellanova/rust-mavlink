@@ -1,14 +1,12 @@
-
 extern crate serial;
+use self::serial::prelude::*;
 
-use std::sync::Mutex;
+
 use std::io::{self};
+use std::sync::Mutex;
 use connection::MavConnection;
 use crate::common::MavMessage;
 use crate::{read_versioned_msg, write_versioned_msg, MavHeader, MavlinkVersion};
-
-//TODO why is this import so hairy?
-use connection::direct_serial::serial::prelude::*;
 
 
 /// Serial MAVLINK connection
